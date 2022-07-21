@@ -8,6 +8,9 @@
         "esModuleInterop": true,
         "moduleResolution": "Node",
 
+        "experimentalDecorators": true,
+        "emitDecoratorMetadata": true,
+
         "forceConsistentCasingInFileNames": true,
         "skipLibCheck": true
     },
