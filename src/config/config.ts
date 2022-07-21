@@ -9,7 +9,10 @@ interface Environment
 const dev: Environment = Object.freeze({
     discord:
         {
-            token: process.env.DISCORD_TOKEN || "0",
+            botname: process.env.DISCORD_BOTNAME || "voltbot",
+            token: process.env.DISCORD_TOKEN,
+            channels: process.env.DISCORD_CHANNEL || ["999644669929607292"],
+            cache: process.env.DISCORD_CACHE || 100,
         }
 });
 
