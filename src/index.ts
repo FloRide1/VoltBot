@@ -1,4 +1,5 @@
-import config from "./config/config"
+import config from "./config/config.js"
+import run_discord_bot from "./discord/discord.js"
 
 function main(): void
 {
@@ -7,6 +8,7 @@ function main(): void
     // Credentials
     if (!check_crendentials())
         console.log("[ERROR] Credentials are not correctly setup");
+    run_discord_bot();
 }
 
 function check_crendentials(): boolean
