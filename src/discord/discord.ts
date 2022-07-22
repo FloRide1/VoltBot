@@ -1,6 +1,7 @@
 import {dirname,
         importx} from "@discordx/importer";
-import {IntentsBitField} from "discord.js";
+import {Channel,
+        IntentsBitField} from "discord.js";
 import {Client} from "discordx";
 
 import config from "../config/config.js"
@@ -9,7 +10,7 @@ async function run_discord_bot(): Promise<void>
 {
     const client = new Client({
         botId: config.discord.botname,
-        prefix: config.discord.prefix,
+        // prefix: config.discord.prefix,
         intents: [
             IntentsBitField.Flags.Guilds,
             IntentsBitField.Flags.GuildMessages,
@@ -28,7 +29,7 @@ async function run_discord_bot(): Promise<void>
         for (let c of config.discord.channels)
         {
             const channel = client.channels.cache.get(c);
-            console.log(`[BOT] Fetch cache message from ${channel?.name}(${channel?.id})`);
+            console.log(`[BOT] Fetch message from ${channel?.name}(${channel?.id})`);
             channel?.messages.fetch({ limit: config.discord.cache })
         }
     });
