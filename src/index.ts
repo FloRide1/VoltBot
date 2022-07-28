@@ -7,13 +7,16 @@ function main(): void
 
     // Credentials
     if (!check_crendentials())
+    {
         console.log("[ERROR] Credentials are not correctly setup");
+        return;
+    }
     run_discord_bot();
 }
 
 function check_crendentials(): boolean
 {
-    if (config.discord.token === "0")
+    if (config.discord.token == null || config.discord.token == undefined)
         return false;
     return true;
 }
