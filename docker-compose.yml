@@ -1,5 +1,8 @@
 version: '3.1'
 
+networks:
+  db_network:
+
 services:
   database:
     image: postgres
@@ -11,3 +14,14 @@ services:
       PGDATA: ${PGDATA}
     ports:
       - 5432:${POSTGRES_PORT}
+    networks:
+      - db_network
+  bot:
+    build: .
+    networks:
+      - db_network
+    depends_on: [database]
+    # Only while developpment
+    # volumes:
+    # - ./src:/home/node/app/src
+    # - ./prisma:/home/node/app/prisma
