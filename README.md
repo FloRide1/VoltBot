@@ -4,8 +4,7 @@
 ## About
 This repo is a discord bot for Epita, use to detect and show mistake for student's messages.
 
-## How to launch it ?
-### Setup .env file
+## Setup
 Create a text file name `.env` at the root of the project
 ```sh
 touch .env
@@ -32,19 +31,26 @@ DATABASE_URL="${DATABASE_TYPE}://${DATABASE_USER}:${DATABASE_PASSWORD}@${DATABAS
 
 # Discord
 DISCORD_TOKEN="<YOUR_DISCORD_BOT_TOKEN>"
+``` 
+
+
+## Launch the bot
+There are 2 ways possible:
+
+### Simple:
+```sh 
+# Launch docker-compose in --detach mode
+docker-compose up -d
 ```
 
-### Launch the bot
-Well actually you can manually setup an PostgreSQL Database, but if you're lazy just run:
+### Less simple :P:
+You need to manually setup your postgresql database and then:
 ```sh
 # Install Package
 npm install
 
-# Launch docker-compose
-docker-compose up -d
-
 # Migrate Database
-npx prisma migrate dev --name init
+npx prisma generate
 
 # Launch it
 npm start
