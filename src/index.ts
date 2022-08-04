@@ -1,7 +1,12 @@
+import pkg from '@prisma/client';
+const { PrismaClient } = pkg;
+
 import config from "./config/config.js"
 import run_discord_bot from "./discord/discord.js"
 
-function main(): void
+const prisma = new PrismaClient()
+
+async function main(): Promise<void>
 {
     console.log("VoltBolt - Hello World");
 
