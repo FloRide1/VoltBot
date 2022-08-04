@@ -1,6 +1,7 @@
 import type {ArgsOf} from "discordx";
 import {Discord,
-        On} from "discordx";
+        On,
+        Client} from "discordx";
 import check_text from "../../spellcheck/spellcheck.js";
 import config from "../../config/config.js";
 import {Commands} from "../commands/commands.js";
@@ -9,8 +10,10 @@ import {Commands} from "../commands/commands.js";
 export abstract class AppDiscord
 {
     @On("messageCreate")
-    onMessageCreate([message]: ArgsOf<"messageCreate">)
+    onMessageCreate([message]: ArgsOf<"messageCreate">, client: Client): void
     {
+        if (message.author?.id == client.user?.id)
+            return;
         if (Commands.is_command(message))
         {
             Commands.apply_command(message);
@@ -27,8 +30,10 @@ export abstract class AppDiscord
     }
 
     @On("messageUpdate")
-    onMessageUpdate([old_message, new_message]: ArgsOf<"messageUpdate">)
+    onMessageUpdate([old_message, new_message]: ArgsOf<"messageUpdate">, client: Client)
     {
+        if (old_message.author?.id == client.user?.id)
+            return;
         console.log(`[BOT] Message Update from \"${new_message.author?.username}\"(${new_message.author?.id}): \"${old_message.content}\" to \"${new_message.content}\" [${new_message.id}]`);
         if (new_message.content === null)
             return;
