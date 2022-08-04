@@ -10,7 +10,6 @@ async function run_discord_bot(): Promise<void>
 {
     const client = new Client({
         botId: config.discord.botname,
-        // prefix: config.discord.prefix,
         intents: [
             IntentsBitField.Flags.Guilds,
             IntentsBitField.Flags.GuildMessages,

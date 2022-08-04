@@ -3,6 +3,7 @@ import {Discord,
         On} from "discordx";
 import check_text from "../../spellcheck/spellcheck.js";
 import config from "../../config/config.js";
+import {Commands} from "../commands/commands.js";
 
 @Discord()
 export abstract class AppDiscord
@@ -10,6 +11,11 @@ export abstract class AppDiscord
     @On("messageCreate")
     onMessageCreate([message]: ArgsOf<"messageCreate">)
     {
+        if (Commands.is_command(message))
+        {
+            Commands.apply_command(message);
+            return;
+        }
         console.log(`[BOT] New Message from "${message.author.username}"(${message.author.id}): "${message.content}" [${message.id}]`);
         check_text(message.content).then((res) => {
             if (res.corrections.length != 0)
